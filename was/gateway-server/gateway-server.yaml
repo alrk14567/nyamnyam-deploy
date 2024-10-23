@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: gateway-server
-          image: alrk/nyamnyam-gateway-server:latest # Gateway 서버 이미지 경로
+          image: docker.io/alrk/nyamnyam-gateway-server:latest # Gateway 서버 이미지 경로
           ports:
             - containerPort: 8000 # Gateway 서버 기본 포트
           resources:

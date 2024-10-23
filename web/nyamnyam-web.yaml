@@ -1,0 +1,63 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: nyamnyam-nextjs
+  namespace: nyamnyam
+spec:
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: nyamnyam-nextjs
+  template:
+    metadata:
+      labels:
+        app: nyamnyam-nextjs
+    spec:
+      containers:
+        - name: nyamnyam-nextjs
+          image: harbor.dorong9.com/nyamnyam/nyamnyam-nextjs:153
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: "0"
+              memory: "0"
+            limits:
+              cpu: "500m"
+              memory: "600Mi"
+      imagePullSecrets:
+        - name: nyamnyam-regcred
+  strategy:
+    canary:
+      canaryService: nyamnyam-nextjs-canary
+      steps:
+        - setWeight: 50
+        - pause: {}
+      maxSurge: "50%"
+      maxUnavailable: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nyamnyam-nextjs
+  namespace: nyamnyam
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  selector:
+    app: nyamnyam-nextjs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nyamnyam-nextjs-canary
+  namespace: nyamnyam
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  selector:
+    app: nyamnyam-nextjs   

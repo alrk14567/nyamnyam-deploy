@@ -1,0 +1,74 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: restaurant-service
+  namespace: nyamnyam
+spec:
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: restaurant-service
+  template:
+    metadata:
+      labels:
+        app: restaurant-service
+    spec:
+      containers:
+        - name: restaurant-service
+          image: harbor.dorong9.com/nyamnyam/review-service:6
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 0m
+              memory: 0Mi
+            limits:
+              cpu: 500m
+              memory: 800Mi
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config
+          env:
+            - name: SPRING_CONFIG_LOCATION
+              value: file:/app/config/application.properties
+      volumes:
+        - name: config-volume
+          configMap:
+            name: restaurant-service-config
+      imagePullSecrets:
+        - name: nyamnyam-regcred
+  strategy:
+    canary:
+      canaryService: restaurant-service-canary
+      stableService: restaurant-service-stable
+      steps:
+        - setWeight: 50
+        - pause: {duration: 10m}
+      maxSurge: "50%"
+      maxUnavailable: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: restaurant-service-stable
+  namespace: nyamnyam
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: restaurant-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: restaurant-service-canary
+  namespace: nyamnyam
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: restaurant-service

@@ -16,16 +16,17 @@ spec:
     spec:
       containers:
         - name: nyamnyam-mysql
-          image: yobasystems/alpine-mariadb:10.5.9
+          image: mysql:8.0
+          # 실제 사용하는 이미지로 변경
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mysql-secrets
                   key: mysql-password
-            - name: MARIADB_CHARACTER_SET_SERVER
+            - name: MYSQL_CHARACTER_SET_SERVER
               value: "utf8mb4"
-            - name: MARIADB_COLLATION_SERVER
+            - name: MYSQL_COLLATION_SERVER
               value: "utf8mb4_unicode_ci"
           ports:
             - containerPort: 3306
@@ -36,9 +37,6 @@ spec:
             - name: init-script
               mountPath: /docker-entrypoint-initdb.d/init.sql
               subPath: init.sql
-            # - name: mysql-config
-            #   mountPath: /etc/mysql/conf.d/custom.cnf
-            #   subPath: custom.cnf
           resources:
             requests:
               memory: "0Mi"
@@ -53,12 +51,6 @@ spec:
         - name: init-script
           configMap:
             name: db-init-script
-        # - name: mysql-config
-        #   configMap:
-        #     name: mysql-custom-config
-        #     items:
-        #     - key: custom.cnf
-        #       path: custom.cnf
 ---
 apiVersion: v1
 kind: Service

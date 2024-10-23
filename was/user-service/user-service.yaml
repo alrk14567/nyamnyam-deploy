@@ -1,10 +1,10 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: user-service
   namespace: nyamnyam
 spec:
-  revisionHistoryLimit: 1
+  replicas: 1
   selector:
     matchLabels:
       app: user-service
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: harbor.dorong9.com/mannazo/user-service:206
+          image: nyamnyam.kr/nyamnyam/user-service:206
           ports:
             - containerPort: 8080
           resources:
@@ -37,33 +37,11 @@ spec:
             name: user-service-config
       imagePullSecrets:
         - name: nyamnyam-regcred
-  strategy:
-    canary:
-      canaryService: user-service-canary
-      stableService: user-service-stable
-      steps:
-        - setWeight: 50
-        - pause: {duration: 10m}
-      maxSurge: "50%"
-      maxUnavailable: 0
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service-stable
-  namespace: nyamnyam
-spec:
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
-  selector:
-    app: user-service
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: user-service-canary
+  name: user-service
   namespace: nyamnyam
 spec:
   ports:

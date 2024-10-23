@@ -1,5 +1,5 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: chat-service
   namespace: nyamnyam
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: chat-service
-          image: harbor.dorong9.com/nyamnyam/chat-service:89
+          image: nyamnyam.kr/nyamnyam/chat-service:89
           ports:
             - containerPort: 8080
           resources:
@@ -37,33 +37,11 @@ spec:
             name: chat-service-config
       imagePullSecrets:
         - name: nyamnyam-regcred
-  strategy:
-    canary:
-      canaryService: chat-service-canary
-      stableService: chat-service-stable
-      steps:
-        - setWeight: 50
-        - pause: {duration: 10m}
-      maxSurge: "50%"
-      maxUnavailable: 0
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: chat-service-stable
-  namespace: nyamnyam
-spec:
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
-  selector:
-    app: chat-service
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: chat-service-canary
+  name: chat-service
   namespace: nyamnyam
 spec:
   ports:

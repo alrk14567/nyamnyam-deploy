@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: post-service
-          image: nyamnyam.kr/nyamnyam/post-service:85
+          image: alrk/nyamnyam-post-service
           ports:
             - containerPort: 8080
           resources:

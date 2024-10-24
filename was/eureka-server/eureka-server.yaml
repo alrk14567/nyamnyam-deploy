@@ -29,10 +29,6 @@ spec:
           env:
             - name: SPRING_CONFIG_LOCATION
               value: file:/app/config/application.yaml
-              valueFrom:
-                secretKeyRef:
-                  name: git-credentials
-                  key: password
           volumeMounts:
             - name: eureka-volume
               mountPath: /app/config  # 설정 파일을 마운트할 경로

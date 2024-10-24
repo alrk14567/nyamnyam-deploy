@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: restaurant-service
-          image: alrk/nyamnyam-restaurant-service
+          image: docker-io/alrk/nyamnyam-restaurant-service:latest
           ports:
             - containerPort: 8080
           resources:
@@ -34,7 +34,7 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: restaurant-service-config
+            name: restaurant-service
       imagePullSecrets:
         - name: nyamnyam-regcred
 ---

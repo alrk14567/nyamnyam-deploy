@@ -17,7 +17,7 @@ spec:
         - name: restaurant-service
           image: docker.io/alrk/nyamnyam-restaurant-service:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8004
           resources:
             requests:
               cpu: 100m
@@ -46,7 +46,7 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8004
+      targetPort: 8004
   selector:
     app: restaurant-service

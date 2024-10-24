@@ -17,7 +17,7 @@ spec:
         - name: chat-service
           image: docker.io/alrk/nyamnyam-chat-service:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8002
           resources:
             requests:
               cpu: 100m
@@ -46,7 +46,7 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8002
+      targetPort: 8002
   selector:
     app: chat-service

@@ -17,7 +17,7 @@ spec:
         - name: post-service
           image: docker.io/alrk/nyamnyam-post-service:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8003
           resources:
             requests:
               cpu: 100m
@@ -46,7 +46,7 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8003
+      targetPort: 8003
   selector:
     app: post-service

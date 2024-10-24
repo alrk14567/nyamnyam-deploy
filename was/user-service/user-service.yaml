@@ -17,7 +17,7 @@ spec:
         - name: user-service
           image: docker.io/alrk/nyamnyam-user-service:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8005
           resources:
             requests:
               cpu: 100m
@@ -46,7 +46,7 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8005
+      targetPort: 8005
   selector:
     app: user-service

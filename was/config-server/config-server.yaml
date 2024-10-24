@@ -35,12 +35,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: git-credentials
-                  key: ssh-privateKey
+                  key: privateKey
             - name: SPRING_CLOUD_CONFIG_SERVER_GIT_HOST_KEY
               valueFrom:
                 secretKeyRef:
                   name: git-credentials
-                  key: ssh-hostKey
+                  key: hostKey
             - name: SPRING_CLOUD_CONFIG_SERVER_ENCRYPT_ENABLED
               value: "false"
           volumeMounts:

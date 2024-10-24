@@ -57,6 +57,7 @@ metadata:
   name: config-server
   namespace: nyamnyam
 spec:
+  type: LoadBalancer  # 여기를 LoadBalancer로 변경
   ports:
     - protocol: TCP
       port: 8888

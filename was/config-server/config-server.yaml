@@ -30,17 +30,17 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: git
             - name: SPRING_CLOUD_CONFIG_SERVER_GIT_URI
-              value: git@github.com:alrk14567/nyamnyam-config-server.git
+              value: git@github.com:alrk14567/nyamnyam-secret-server.git
             - name: SPRING_CLOUD_CONFIG_SERVER_GIT_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:
                   name: git-credentials
-                  key: privateKey
+                  key: ssh-privateKey
             - name: SPRING_CLOUD_CONFIG_SERVER_GIT_HOST_KEY
               valueFrom:
                 secretKeyRef:
                   name: git-credentials
-                  key: hostKey
+                  key: ssh-publicKey
             - name: SPRING_CLOUD_CONFIG_SERVER_ENCRYPT_ENABLED
               value: "false"
           volumeMounts:

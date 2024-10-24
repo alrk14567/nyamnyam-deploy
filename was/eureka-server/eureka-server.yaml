@@ -27,16 +27,8 @@ spec:
               cpu: 500m
               memory: 512Mi
           env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: git
-            - name: SPRING_CLOUD_EUREKA_SERVER_GIT_URI
-              value: https://github.com/alrk14567/nyamnyam-spring-cloud.git
-            - name: SPRING_CLOUD_EUREKA_SERVER_GIT_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: git-credentials
-                  key: username
-            - name: SPRING_CLOUD_EUREKA_SERVER_GIT_PASSWORD
+            - name: SPRING_CONFIG_LOCATION
+              value: file:/app/config/application.yaml
               valueFrom:
                 secretKeyRef:
                   name: git-credentials

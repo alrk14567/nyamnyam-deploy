@@ -30,19 +30,17 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: git
             - name: SPRING_CLOUD_CONFIG_SERVER_GIT_URI
-              value: git@github.com:alrk14567/nyamnyam-secret-server.git
-            - name: SPRING_CLOUD_CONFIG_SERVER_GIT_PRIVATE_KEY
+              value: https://github.com/alrk14567/nyamnyam-config-server.git
+            - name: SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: git-credentials
-                  key: ssh-privateKey
-            - name: SPRING_CLOUD_CONFIG_SERVER_GIT_HOST_KEY
+                  key: username
+            - name: SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: git-credentials
-                  key: ssh-publicKey
-            - name: SPRING_CLOUD_CONFIG_SERVER_ENCRYPT_ENABLED
-              value: "false"
+                  key: password
           volumeMounts:
             - name: config-volume
               mountPath: /app/config  # 설정 파일을 마운트할 경로
@@ -59,7 +57,6 @@ metadata:
   name: config-server
   namespace: nyamnyam
 spec:
-  type: LoadBalancer  # 여기를 LoadBalancer로 변경
   ports:
     - protocol: TCP
       port: 8888

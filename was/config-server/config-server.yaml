@@ -34,12 +34,12 @@ spec:
             - name: SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: git-credentials
+                  name: git-credential
                   key: username
             - name: SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: git-credentials
+                  name: git-credential
                   key: password
           volumeMounts:
             - name: config-volume

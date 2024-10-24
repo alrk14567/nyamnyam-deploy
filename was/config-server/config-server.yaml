@@ -30,17 +30,19 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: git
             - name: SPRING_CLOUD_CONFIG_SERVER_GIT_URI
-              value: https://github.com/alrk14567/nyamnyam-config-server.git
-            - name: SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME
+              value: git@github.com:alrk14567/nyamnyam-config-server.git
+            - name: SPRING_CLOUD_CONFIG_SERVER_GIT_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:
                   name: git-credentials
-                  key: username
-            - name: SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD
+                  key: ssh-privateKey
+            - name: SPRING_CLOUD_CONFIG_SERVER_GIT_HOST_KEY
               valueFrom:
                 secretKeyRef:
                   name: git-credentials
-                  key: password
+                  key: ssh-hostKey
+            - name: SPRING_CLOUD_CONFIG_SERVER_ENCRYPT_ENABLED
+              value: "false"
           volumeMounts:
             - name: config-volume
               mountPath: /app/config  # 설정 파일을 마운트할 경로

@@ -30,7 +30,7 @@ spec:
               mountPath: /app/config
           env:
             - name: SPRING_CONFIG_LOCATION
-              value: file:/app/config/application.properties
+              value: file:nyamnyam.kr/service/admin-service/src/main/resources/application.yaml
       volumes:
         - name: config-volume
           configMap:

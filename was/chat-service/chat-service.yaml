@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: chat-service
-          image: docker-io/alrk/nyamnyam-chat-service:latest
+          image: docker.io/alrk/nyamnyam-chat-service:latest
           ports:
             - containerPort: 8080
           resources:

@@ -30,7 +30,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: git
             - name: SPRING_CLOUD_EUREKA_SERVER_GIT_URI
-              value: https://github.com/JEunseo/nyamnyam-eureka-server.git
+              value: https://github.com/alrk14567/nyamnyam-spring-cloud.git
             - name: SPRING_CLOUD_EUREKA_SERVER_GIT_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -47,7 +47,7 @@ spec:
       volumes:
         - name: eureka-volume
           configMap:
-            name: eureka-server  # ConfigMap 이름, 필요에 따라 수정
+            name: eureka-server
       imagePullSecrets:
         - name: nyamnyam-regcred  # 이미지 풀 비밀 이름, 맞는지 확인
 ---

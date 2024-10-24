@@ -3,9 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gateway-server
-  namespace: nyamnyam # 네임스페이스 이름
+  namespace: nyamnyam
 spec:
-  replicas: 1
   revisionHistoryLimit: 1
   selector:
     matchLabels:
@@ -17,9 +16,9 @@ spec:
     spec:
       containers:
         - name: gateway-server
-          image: docker.io/alrk/nyamnyam-gateway-server:latest # Gateway 서버 이미지 경로
+          image: docker.io/alrk/nyamnyam-gateway-server:latest
           ports:
-            - containerPort: 8000 # Gateway 서버 기본 포트
+            - containerPort: 8000
           resources:
             requests:
               cpu: 100m
@@ -29,31 +28,30 @@ spec:
               memory: 512Mi
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: prod
-            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-              value: http://eureka-server.nyamnyam.svc.cluster.local/eureka/ # Eureka 서버 주소
+              value: git
             - name: SPRING_CLOUD_CONFIG_URI
-              value: http://config-server.nyamnyam.svc.cluster.local:8888 # Config 서버 주소
+              value: http://config-server:8888
+            - name: SPRING_APPLICATION_NAME
+              value: gateway-server
           volumeMounts:
-            - name: config-volume
-              mountPath: /app/config # Config 파일 경로 마운트
+            - name: gateway-volume
+              mountPath: /app/config
       volumes:
-        - name: config-volume
+        - name: gateway-volume
           configMap:
-            name: gateway-server # ConfigMap 이름, 필요 시 수정
+            name: gateway-server
       imagePullSecrets:
-        - name: nyamnyam-regcred # 이미지 풀 비밀 이름
+        - name: nyamnyam-regcred
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: gateway-server
-  namespace: nyamnyam # 네임스페이스 이름
+  namespace: nyamnyam
 spec:
-  type: LoadBalancer # 외부에서 접근할 수 있도록 LoadBalancer로 설정
   ports:
     - protocol: TCP
-      port: 80 # 외부에서 접근하는 포트
-      targetPort: 8000 # 컨테이너 내부 포트
+      port: 8000
+      targetPort: 8000
   selector:
     app: gateway-server

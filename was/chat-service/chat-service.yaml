@@ -44,9 +44,11 @@ metadata:
   name: chat-service
   namespace: nyamnyam
 spec:
+  type: LoadBalancer  # 로드 밸런서를 사용하기 위해 추가
   ports:
     - protocol: TCP
       port: 8002
       targetPort: 8002
   selector:
     app: chat-service
+

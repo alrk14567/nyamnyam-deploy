@@ -44,9 +44,10 @@ metadata:
   name: admin-service
   namespace: nyamnyam
 spec:
+  type: LoadBalancer  # 로드 밸런서를 사용하기 위해 추가
   ports:
     - protocol: TCP
-      port: 8001  # 서비스 포트를 실제 컨테이너 포트와 일치시키기
+      port: 8001
       targetPort: 8001
   selector:
     app: admin-service

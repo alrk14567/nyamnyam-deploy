@@ -16,7 +16,7 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: swagger-service
+                name: home-service
                 port:
                   number: 80
           - path: /admin(/|$)(.*)

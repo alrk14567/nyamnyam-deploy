@@ -44,9 +44,11 @@ metadata:
   name: post-service
   namespace: nyamnyam
 spec:
+  type: LoadBalancer  # LoadBalancer 타입으로 설정
   ports:
     - protocol: TCP
       port: 8003
       targetPort: 8003
   selector:
     app: post-service
+

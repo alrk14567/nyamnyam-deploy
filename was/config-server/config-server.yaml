@@ -8,7 +8,7 @@ spec:
   revisionHistoryLimit: 1
   selector:
     matchLabels:
-      app: config-server
+      app: config-serverku
   template:
     metadata:
       labels:

@@ -44,7 +44,7 @@ metadata:
   name: admin-service
   namespace: nyamnyam
 spec:
-  type: LoadBalancer  # 로드 밸런서를 사용하기 위해 추가
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 8001

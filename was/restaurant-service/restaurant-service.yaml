@@ -44,7 +44,7 @@ metadata:
   name: restaurant-service
   namespace: nyamnyam
 spec:
-  type: LoadBalancer  # LoadBalancer 타입으로 설정
+  type: ClusterIP  # LoadBalancer 타입으로 설정
   ports:
     - protocol: TCP
       port: 8004

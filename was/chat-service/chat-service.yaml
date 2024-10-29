@@ -4,7 +4,7 @@ metadata:
   name: chat-service
   namespace: nyamnyam
 spec:
-  revisionHistoryLimit: 1
+  replicas: 1
   selector:
     matchLabels:
       app: chat-service

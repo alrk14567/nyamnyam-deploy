@@ -44,7 +44,7 @@ metadata:
   name: user-service
   namespace: nyamnyam
 spec:
-  type: ClusterIP  # LoadBalancer 타입으로 설정
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 8005

@@ -21,11 +21,11 @@ spec:
             - containerPort: 8888
           resources:
             requests:
-              cpu: 100m
-              memory: 256Mi
-            limits:
-              cpu: 500m
+              cpu: 200m
               memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
           env:
             - name: SPRING_APPLICATION_NAME
               value: config-server

@@ -17,4 +17,4 @@ spec:
               service:
                 name: gateway-server
                 port:
-                  number: 8000
+                  number: 80

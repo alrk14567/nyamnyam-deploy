@@ -20,10 +20,10 @@ spec:
             - containerPort: 8003
           resources:
             requests:
-              cpu: 100m
+              cpu: 200m
               memory: 256Mi
             limits:
-              cpu: 700m
+              cpu: 800m
               memory: 512Mi
           volumeMounts:
             - name: config-volume

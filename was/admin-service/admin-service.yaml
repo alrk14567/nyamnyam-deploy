@@ -20,11 +20,11 @@ spec:
             - containerPort: 8001
           resources:
             requests:
-              cpu: 100m
+              cpu: 200m
               memory: 256Mi
             limits:
-              cpu: 700m
-              memory: 512Mi
+              cpu: 800m
+              memory: 256Mi
           volumeMounts:
             - name: config-volume
               mountPath: /app/config

@@ -15,12 +15,12 @@ spec:
     spec:
       containers:
         - name: chat-service
-          image: docker.io/alrk/nyamnyam-chat-service:latest
+          image: docker.io/alrk/nyamnyam-chat-service:0.01
           ports:
             - containerPort: 8002
           resources:
             requests:
-              cpu: 500m
+              cpu: 200m
               memory: 512Mi
             limits:
               cpu: 1000m

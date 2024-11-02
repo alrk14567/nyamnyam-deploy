@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: restaurant-service
-          image: docker.io/alrk/nyamnyam-restaurant-service:latest
+          image: docker.io/alrk/nyamnyam-restaurant-service:0.01
           ports:
             - containerPort: 8004
           resources:

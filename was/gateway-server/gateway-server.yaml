@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: gateway-server
-          image: docker.io/alrk/nyamnyam-gateway-server:latest
+          image: docker.io/alrk/nyamnyam-gateway-server:0.01
           ports:
             - containerPort: 8000
           resources:

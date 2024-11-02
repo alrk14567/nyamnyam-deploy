@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: docker.io/alrk/nyamnyam-user-service:latest
+          image: docker.io/alrk/nyamnyam-user-service:0.01
           ports:
             - containerPort: 8005
           resources:

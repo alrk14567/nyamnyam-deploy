@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: config-server
-          image: docker.io/alrk/nyamnyam-config-server:0.01
+          image: docker.io/alrk/nyamnyam-config-server:latest
           ports:
             - containerPort: 8888
           resources:

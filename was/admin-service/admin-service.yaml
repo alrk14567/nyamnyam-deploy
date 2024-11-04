@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: admin-service
-          image: docker.io/alrk/nyamnyam-admin-service:0.01
+          image: docker.io/alrk/nyamnyam-admin-service:latest
           ports:
             - containerPort: 8001
           resources:

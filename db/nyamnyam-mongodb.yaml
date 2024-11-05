@@ -5,7 +5,7 @@ metadata:
   namespace: nyamnyam
 spec:
   replicas: 1
-  revisionHistoryLimit: 1  # revision history limit 설정
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: mongo
@@ -39,7 +39,7 @@ spec:
                   name: mongodb-secrets
                   key: mongodb-password
             - name: MONGO_INITDB_DATABASE
-              value: "test"  # 데이터베이스 이름 설정
+              value: "test"
           volumeMounts:
             - name: mongodb-data
               mountPath: /data/db
@@ -53,7 +53,8 @@ spec:
           configMap:
             name: mongodb-init-script
       imagePullSecrets:
-        - name: nyamnyam-regcred  # 이미지 풀 비밀 설정
+        - name: nyamnyam-regcred
+
 ---
 apiVersion: v1
 kind: Service
@@ -61,9 +62,9 @@ metadata:
   name: nyamnyam-mongodb-service
   namespace: nyamnyam
 spec:
-  type: LoadBalancer  # LoadBalancer로 설정하여 외부 접근 가능
+  type: LoadBalancer
   selector:
-    app: mongo  # 올바른 selector
+    app: mongo
   ports:
     - protocol: TCP
       port: 27017

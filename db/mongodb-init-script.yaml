@@ -9,8 +9,5 @@ data:
     db.createUser({
         user: "root",
         pwd: "1q2w3e4r",
-        roles: [
-            { role: "readWrite", db: "test" }
-        ]
+        roles: [{ role: "readWrite", db: "test" }]
     });
-

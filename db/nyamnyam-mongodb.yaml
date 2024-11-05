@@ -28,11 +28,11 @@ spec:
               memory: "500Mi"
               cpu: "512m"
           env:
-            - name: MONGO_INITDB_ROOT_USERNAME
+            - name: USERNAME
               value: "root"  # 직접 설정한 사용자 이름
-            - name: MONGO_INITDB_ROOT_PASSWORD
+            - name: PASSWORD
               value: "1q2w3e4r"  # 직접 설정한 비밀번호
-            - name: MONGO_INITDB_DATABASE
+            - name: DATABASE
               value: "test"  # 초기 데이터베이스 이름
           volumeMounts:
             - name: mongodb-data
@@ -53,7 +53,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nyamnyam-mongodb-service
+  name: mongo
   namespace: nyamnyam
 spec:
   type: LoadBalancer

@@ -8,5 +8,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi   # PV와 동일한 용량을 요청
-  volumeName: nyamnyam-mongodb-pv  
+      storage: 5Gi  # 요청하는 스토리지 용량
+  # volumeName: nyamnyam-mongodb-pv  # 주석 처리: 자동 바인딩을 위해 제거

@@ -1,22 +1,32 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: nyamnyam-mongodb
+  name: mongo
   namespace: nyamnyam
 spec:
-  serviceName: nyamnyam-mongodb-service
   replicas: 1
+  revisionHistoryLimit: 1  # revision history limit 설정
   selector:
     matchLabels:
-      app: nyamnyam-mongodb
+      app: mongo
   template:
     metadata:
       labels:
-        app: nyamnyam-mongodb
+        app: mongo
     spec:
       containers:
-        - name: nyamnyam-mongodb
-          image: mongo:4.2.24-bionic
+        - name: mongo
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+              name: mongo
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "500Mi"
+              cpu: "512m"
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
               valueFrom:
@@ -29,22 +39,12 @@ spec:
                   name: mongodb-secrets
                   key: mongodb-password
             - name: MONGO_INITDB_DATABASE
-              value: "test"
-          ports:
-            - containerPort: 27017
-              name: mongodb
+              value: "test"  # 데이터베이스 이름 설정
           volumeMounts:
             - name: mongodb-data
               mountPath: /data/db
             - name: init-scripts
               mountPath: /docker-entrypoint-initdb.d
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "500Mi"
-              cpu: "512m"
       volumes:
         - name: mongodb-data
           persistentVolumeClaim:
@@ -52,6 +52,8 @@ spec:
         - name: init-scripts
           configMap:
             name: mongodb-init-script
+      imagePullSecrets:
+        - name: nyamnyam-regcred  # 이미지 풀 비밀 설정
 ---
 apiVersion: v1
 kind: Service
@@ -59,10 +61,10 @@ metadata:
   name: nyamnyam-mongodb-service
   namespace: nyamnyam
 spec:
+  type: LoadBalancer  # LoadBalancer로 설정하여 외부 접근 가능
   selector:
-    app: nyamnyam-mongodb
+    app: mongo  # 올바른 selector
   ports:
     - protocol: TCP
       port: 27017
       targetPort: 27017
-  type: LoadBalancer

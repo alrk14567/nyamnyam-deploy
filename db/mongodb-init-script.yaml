@@ -8,7 +8,7 @@ data:
     // MongoDB가 시작되면 이 스크립트를 실행하여 사용자 생성 및 데이터 삽입
     db.createUser({
         user: "root",
-        pwd: "1q2w#E$R",
+        pwd: "1q2w3e4r",
         roles: [
             { role: "readWrite", db: "test" }
         ]

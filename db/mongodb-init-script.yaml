@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongodb-init-script
+  namespace: <your-namespace>
+data:
+  init-script.js: |
+    // MongoDB가 시작되면 이 스크립트를 실행하여 사용자 생성 및 데이터 삽입
+    db.createUser({
+        user: "root",
+        pwd: "1q2w#E$R",
+        roles: [
+            { role: "readWrite", db: "test" }
+        ]
+    });
+
+  import-data.sh: |
+    #!/bin/bash
+    for file in mongodata/*.json; do
+      mongoimport --uri mongodb://root:1q2w#E$R@localhost:27017/test --file "$file" --jsonArray
+    done

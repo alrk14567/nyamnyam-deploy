@@ -1,0 +1,1 @@
+{"options":{"capped":true,"size":{"$numberInt":"8192"}},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"b714c5383dd64fcf8839695e31c03d4b","collectionName":"messages","type":"collection"}

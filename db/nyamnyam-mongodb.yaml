@@ -29,17 +29,11 @@ spec:
               cpu: "512m"
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: mongodb-secrets
-                  key: mongodb-username
+              value: "root"  # 직접 설정한 사용자 이름
             - name: MONGO_INITDB_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongodb-secrets
-                  key: mongodb-password
+              value: "1q2w3e4r"  # 직접 설정한 비밀번호
             - name: MONGO_INITDB_DATABASE
-              value: "test"
+              value: "test"  # 초기 데이터베이스 이름
           volumeMounts:
             - name: mongodb-data
               mountPath: /data/db

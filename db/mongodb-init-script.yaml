@@ -17,5 +17,5 @@ data:
   import-data.sh: |
     #!/bin/bash
     for file in mongodata/*.json; do
-      mongoimport --uri mongodb://root:1q2w#E$R@localhost:27017/test --file "$file" --jsonArray
+      mongoimport --uri mongodb://root:1q2w3e4r@localhost:27017/test --file "$file" --jsonArray
     done

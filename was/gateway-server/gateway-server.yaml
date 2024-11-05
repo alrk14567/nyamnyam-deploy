@@ -29,6 +29,12 @@ spec:
           env:
             - name: SPRING_CONFIG_LOCATION
               value: file:/app/config/application.yaml
+            - name: EUREKA_INSTANCE_HOSTNAME
+              value: "gateway-server"
+            - name: EUREKA_INSTANCE_PREFER_IP_ADDRESS
+              value: "false"
+            - name: EUREKA_INSTANCE_INSTANCE_ID
+              value: "gateway-server:${server.port}"
           volumeMounts:
             - name: config-volume
               mountPath: /app/config
@@ -44,11 +50,13 @@ kind: Service
 metadata:
   name: gateway-server
   namespace: nyamnyam
+  annotations:
+    service.beta.kubernetes.io/ncloud-load-balancer-ssl-certificate-no: "34169"
+    service.beta.kubernetes.io/ncloud-load-balancer-tls-ports: "443"
 spec:
   type: LoadBalancer  # LoadBalancer 타입으로 설정
   ports:
-    - protocol: TCP
-      port: 8000
+    - port: 443
       targetPort: 8000
   selector:
     app: gateway-server

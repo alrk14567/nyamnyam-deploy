@@ -6,7 +6,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - abc.nyamnyam.kr
+        - kidonapi.nyamnyam.kr
       secretName: nyamnyam-key
   ingressClassName: nginx
   rules:

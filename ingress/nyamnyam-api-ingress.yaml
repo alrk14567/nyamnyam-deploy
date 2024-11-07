@@ -10,7 +10,7 @@ spec:
       secretName: nyamnyam-key
   ingressClassName: nginx
   rules:
-    - host: abc.nyamnyam.kr
+    - host: kidonapi.nyamnyam.kr
       http:
         paths:
           - path: /api
